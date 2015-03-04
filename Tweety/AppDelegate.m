@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 
+#import "TWSettingsViewController.h"
+#import "TWFeedTableViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -16,7 +19,31 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    //socle de base de l'application
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+
+    //vue spécifique pour afficher tous les messages du serveur
+    TWFeedTableViewController *allMessagesVC = [[TWFeedTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    allMessagesVC.title = @"All messages";
+    
+    //conteneur permettant la navigation depuis allMessagesVC
+    UINavigationController *allMsgNav = [[UINavigationController alloc] initWithRootViewController:allMessagesVC];
+    
+    
+    //vue spécifique pour afficher la reading list
+    TWFeedTableViewController *readingListVC = [[TWFeedTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    readingListVC.title = @"Reading List";
+    UINavigationController *readingLitsNav = [[UINavigationController alloc] initWithRootViewController:readingListVC];
+    
+    
+    //vue de réglages
+    TWSettingsViewController *settings = [[TWSettingsViewController alloc] initWithNibName:@"TWSettingsViewController" bundle:nil];
+    settings.title = @"Settings";
+    
+    tabBarController.viewControllers = @[allMsgNav, readingLitsNav, settings];
+    
+    self.window.rootViewController = tabBarController;
+    
     return YES;
 }
 

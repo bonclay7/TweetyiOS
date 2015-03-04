@@ -10,11 +10,16 @@
 		0C7752AA1AA70AFC004E3B8E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7752A91AA70AFC004E3B8E /* main.m */; };
 		0C7752AD1AA70AFC004E3B8E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7752AC1AA70AFC004E3B8E /* AppDelegate.m */; };
 		0C7752B01AA70AFC004E3B8E /* Tweety.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C7752AE1AA70AFC004E3B8E /* Tweety.xcdatamodeld */; };
-		0C7752B31AA70AFC004E3B8E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7752B21AA70AFC004E3B8E /* ViewController.m */; };
-		0C7752B61AA70AFC004E3B8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C7752B41AA70AFC004E3B8E /* Main.storyboard */; };
 		0C7752B81AA70AFC004E3B8E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C7752B71AA70AFC004E3B8E /* Images.xcassets */; };
 		0C7752BB1AA70AFC004E3B8E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C7752B91AA70AFC004E3B8E /* LaunchScreen.xib */; };
 		0C7752C71AA70AFC004E3B8E /* TweetyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7752C61AA70AFC004E3B8E /* TweetyTests.m */; };
+		0C7752F71AA71535004E3B8E /* FBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7752F61AA71535004E3B8E /* FBSession.m */; };
+		0C7752FD1AA71A5C004E3B8E /* TWSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7752FB1AA71A5C004E3B8E /* TWSettingsViewController.m */; };
+		0C7752FE1AA71A5C004E3B8E /* TWSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C7752FC1AA71A5C004E3B8E /* TWSettingsViewController.xib */; };
+		0C7753071AA71B73004E3B8E /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C7753061AA71B73004E3B8E /* Application.xib */; };
+		0C77530B1AA71BE1004E3B8E /* MessagesCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7753091AA71BE1004E3B8E /* MessagesCreationViewController.m */; };
+		0C77530C1AA71BE1004E3B8E /* MessagesCreationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C77530A1AA71BE1004E3B8E /* MessagesCreationViewController.xib */; };
+		0C7753101AA71EAF004E3B8E /* TWFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C77530F1AA71EAF004E3B8E /* TWFeedTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,14 +39,22 @@
 		0C7752AB1AA70AFC004E3B8E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0C7752AC1AA70AFC004E3B8E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0C7752AF1AA70AFC004E3B8E /* Tweety.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tweety.xcdatamodel; sourceTree = "<group>"; };
-		0C7752B11AA70AFC004E3B8E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0C7752B21AA70AFC004E3B8E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		0C7752B51AA70AFC004E3B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0C7752B71AA70AFC004E3B8E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0C7752B71AA70AFC004E3B8E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Tweety/Images.xcassets; sourceTree = "<group>"; };
 		0C7752BA1AA70AFC004E3B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0C7752C01AA70AFC004E3B8E /* TweetyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TweetyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C7752C51AA70AFC004E3B8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C7752C61AA70AFC004E3B8E /* TweetyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetyTests.m; sourceTree = "<group>"; };
+		0C7752F51AA71535004E3B8E /* FBSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSession.h; sourceTree = "<group>"; };
+		0C7752F61AA71535004E3B8E /* FBSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSession.m; sourceTree = "<group>"; };
+		0C7752FA1AA71A5C004E3B8E /* TWSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWSettingsViewController.h; sourceTree = "<group>"; };
+		0C7752FB1AA71A5C004E3B8E /* TWSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWSettingsViewController.m; sourceTree = "<group>"; };
+		0C7752FC1AA71A5C004E3B8E /* TWSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWSettingsViewController.xib; sourceTree = "<group>"; };
+		0C7753061AA71B73004E3B8E /* Application.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Application.xib; sourceTree = "<group>"; };
+		0C7753081AA71BE1004E3B8E /* MessagesCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesCreationViewController.h; sourceTree = "<group>"; };
+		0C7753091AA71BE1004E3B8E /* MessagesCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesCreationViewController.m; sourceTree = "<group>"; };
+		0C77530A1AA71BE1004E3B8E /* MessagesCreationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesCreationViewController.xib; sourceTree = "<group>"; };
+		0C77530E1AA71EAF004E3B8E /* TWFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWFeedTableViewController.h; sourceTree = "<group>"; };
+		0C77530F1AA71EAF004E3B8E /* TWFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWFeedTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,14 +96,11 @@
 		0C7752A61AA70AFC004E3B8E /* Tweety */ = {
 			isa = PBXGroup;
 			children = (
-				0C7752AB1AA70AFC004E3B8E /* AppDelegate.h */,
-				0C7752AC1AA70AFC004E3B8E /* AppDelegate.m */,
-				0C7752B11AA70AFC004E3B8E /* ViewController.h */,
-				0C7752B21AA70AFC004E3B8E /* ViewController.m */,
-				0C7752B41AA70AFC004E3B8E /* Main.storyboard */,
-				0C7752B71AA70AFC004E3B8E /* Images.xcassets */,
-				0C7752B91AA70AFC004E3B8E /* LaunchScreen.xib */,
-				0C7752AE1AA70AFC004E3B8E /* Tweety.xcdatamodeld */,
+				0C7752F91AA71887004E3B8E /* Classes */,
+				0C7752F81AA71873004E3B8E /* Model */,
+				0C7752F41AA714AD004E3B8E /* RestClient */,
+				0C7752D01AA70B2E004E3B8E /* ViewControllers */,
+				0C7753031AA71ABA004E3B8E /* Resources */,
 				0C7752A71AA70AFC004E3B8E /* Supporting Files */,
 			);
 			path = Tweety;
@@ -120,6 +130,82 @@
 				0C7752C51AA70AFC004E3B8E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0C7752D01AA70B2E004E3B8E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0C7752E81AA71440004E3B8E /* Settings */,
+				0C7752DE1AA713CC004E3B8E /* FeedViewController */,
+				0C77530D1AA71BE5004E3B8E /* MessageCreation */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0C7752DE1AA713CC004E3B8E /* FeedViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0C77530E1AA71EAF004E3B8E /* TWFeedTableViewController.h */,
+				0C77530F1AA71EAF004E3B8E /* TWFeedTableViewController.m */,
+			);
+			name = FeedViewController;
+			sourceTree = "<group>";
+		};
+		0C7752E81AA71440004E3B8E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0C7752FA1AA71A5C004E3B8E /* TWSettingsViewController.h */,
+				0C7752FB1AA71A5C004E3B8E /* TWSettingsViewController.m */,
+				0C7752FC1AA71A5C004E3B8E /* TWSettingsViewController.xib */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		0C7752F41AA714AD004E3B8E /* RestClient */ = {
+			isa = PBXGroup;
+			children = (
+				0C7752F51AA71535004E3B8E /* FBSession.h */,
+				0C7752F61AA71535004E3B8E /* FBSession.m */,
+			);
+			name = RestClient;
+			sourceTree = "<group>";
+		};
+		0C7752F81AA71873004E3B8E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0C7752AE1AA70AFC004E3B8E /* Tweety.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0C7752F91AA71887004E3B8E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0C7752AB1AA70AFC004E3B8E /* AppDelegate.h */,
+				0C7752AC1AA70AFC004E3B8E /* AppDelegate.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		0C7753031AA71ABA004E3B8E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0C7752B71AA70AFC004E3B8E /* Images.xcassets */,
+				0C7752B91AA70AFC004E3B8E /* LaunchScreen.xib */,
+				0C7753061AA71B73004E3B8E /* Application.xib */,
+			);
+			name = Resources;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		0C77530D1AA71BE5004E3B8E /* MessageCreation */ = {
+			isa = PBXGroup;
+			children = (
+				0C77530A1AA71BE1004E3B8E /* MessagesCreationViewController.xib */,
+				0C7753091AA71BE1004E3B8E /* MessagesCreationViewController.m */,
+				0C7753081AA71BE1004E3B8E /* MessagesCreationViewController.h */,
+			);
+			name = MessageCreation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,7 +288,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C7752B61AA70AFC004E3B8E /* Main.storyboard in Resources */,
+				0C77530C1AA71BE1004E3B8E /* MessagesCreationViewController.xib in Resources */,
+				0C7753071AA71B73004E3B8E /* Application.xib in Resources */,
+				0C7752FE1AA71A5C004E3B8E /* TWSettingsViewController.xib in Resources */,
 				0C7752BB1AA70AFC004E3B8E /* LaunchScreen.xib in Resources */,
 				0C7752B81AA70AFC004E3B8E /* Images.xcassets in Resources */,
 			);
@@ -222,9 +310,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C77530B1AA71BE1004E3B8E /* MessagesCreationViewController.m in Sources */,
+				0C7752FD1AA71A5C004E3B8E /* TWSettingsViewController.m in Sources */,
+				0C7752F71AA71535004E3B8E /* FBSession.m in Sources */,
+				0C7753101AA71EAF004E3B8E /* TWFeedTableViewController.m in Sources */,
 				0C7752B01AA70AFC004E3B8E /* Tweety.xcdatamodeld in Sources */,
 				0C7752AD1AA70AFC004E3B8E /* AppDelegate.m in Sources */,
-				0C7752B31AA70AFC004E3B8E /* ViewController.m in Sources */,
 				0C7752AA1AA70AFC004E3B8E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,20 +339,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0C7752B41AA70AFC004E3B8E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0C7752B51AA70AFC004E3B8E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0C7752B91AA70AFC004E3B8E /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0C7752BA1AA70AFC004E3B8E /* Base */,
 			);
 			name = LaunchScreen.xib;
+			path = Tweety;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -348,6 +432,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Tweety/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -358,6 +443,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Tweety/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

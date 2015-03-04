@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TWSettingsViewController.h
 //  Tweety
 //
 //  Created by Ro on 04/03/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface TWSettingsViewController : UIViewController
 
 @end
-
