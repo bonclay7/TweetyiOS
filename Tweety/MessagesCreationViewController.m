@@ -8,7 +8,9 @@
 
 #import "MessagesCreationViewController.h"
 
-@interface MessagesCreationViewController ()
+@interface MessagesCreationViewController (){
+    int topValue;
+}
 
 @end
 
@@ -29,6 +31,16 @@
     self.navigationItem.rightBarButtonItem = done;
     self.navigationItem.leftBarButtonItem = cancel;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+    topValue = self.tweetTextView.contentInset.top;
+    
 }
 
 - (IBAction)cancelEditing:(id)sender{
@@ -45,6 +57,23 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)keyboardWasShown:(NSNotification *)notification {
+    if (self.tweetTextView != nil) {
+        NSDictionary* info = [notification userInfo];
+        CGRect keyboardRect = [self.tweetTextView convertRect:[[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue] fromView:nil];
+        CGSize keyboardSize = keyboardRect.size;
+        
+        self.tweetTextView.contentInset = UIEdgeInsetsMake(topValue, 0, keyboardSize.height, 0);
+        self.tweetTextView.scrollIndicatorInsets = self.tweetTextView.contentInset;
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)notification {
+    self.tweetTextView.scrollIndicatorInsets = UIEdgeInsetsZero;
+    self.tweetTextView.scrollIndicatorInsets = UIEdgeInsetsZero;
 }
 
 /*

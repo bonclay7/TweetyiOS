@@ -15,5 +15,6 @@ typedef void(^MTMessageCreationViewControllerDidFinish) (MessagesCreationViewCon
 @interface MessagesCreationViewController : UIViewController
 
 @property (copy) MTMessageCreationViewControllerDidFinish completionHandler;
+@property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
 
 @end
