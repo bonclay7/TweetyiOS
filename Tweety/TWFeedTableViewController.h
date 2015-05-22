@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface TWFeedTableViewController : UITableViewController
+@interface TWFeedTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @end

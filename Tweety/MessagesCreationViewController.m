@@ -7,14 +7,36 @@
 //
 
 #import "MessagesCreationViewController.h"
+#import "FBDataProvider.h"
+#import "FBSession.h"
 
 @interface MessagesCreationViewController (){
-    int topValue;
+    UIEdgeInsets _originalEdgeInsets;
 }
 
 @end
 
 @implementation MessagesCreationViewController
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    _originalEdgeInsets = self.tweetTextView.contentInset;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+
+    
+    self.tweetTextView.text = @"";
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,16 +53,6 @@
     self.navigationItem.rightBarButtonItem = done;
     self.navigationItem.leftBarButtonItem = cancel;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-    
-    topValue = self.tweetTextView.contentInset.top;
-    
 }
 
 - (IBAction)cancelEditing:(id)sender{
@@ -49,8 +61,10 @@
 
 
 - (IBAction)endEditing:(id)sender{
+    
+    [[FBDataProvider sharedInstance] sendMessage:self.tweetTextView.text];
+    NSLog(@"%@", self.tweetTextView.text);
     self.completionHandler(self);
-
 }
 
 
@@ -60,20 +74,19 @@
 }
 
 
-- (void)keyboardWasShown:(NSNotification *)notification {
-    if (self.tweetTextView != nil) {
-        NSDictionary* info = [notification userInfo];
-        CGRect keyboardRect = [self.tweetTextView convertRect:[[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue] fromView:nil];
-        CGSize keyboardSize = keyboardRect.size;
-        
-        self.tweetTextView.contentInset = UIEdgeInsetsMake(topValue, 0, keyboardSize.height, 0);
-        self.tweetTextView.scrollIndicatorInsets = self.tweetTextView.contentInset;
-    }
+- (void)keyboardWasShown:(NSNotification*)notification {
+    CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    keyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
+    
+    
+    self.tweetTextView.contentInset = UIEdgeInsetsMake(_originalEdgeInsets.top, 0, keyboardFrame.size.height, 0);
+    self.tweetTextView.scrollIndicatorInsets = self.tweetTextView.contentInset;
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)notification {
-    self.tweetTextView.scrollIndicatorInsets = UIEdgeInsetsZero;
-    self.tweetTextView.scrollIndicatorInsets = UIEdgeInsetsZero;
+    self.tweetTextView.contentInset = _originalEdgeInsets;
+    self.tweetTextView.scrollIndicatorInsets = _originalEdgeInsets;
 }
 
 /*

@@ -21,6 +21,7 @@ typedef void(^FBSessionGenericCompletionHandler)(FBSession *session, id answer, 
 
 @interface FBSession : NSObject
 
+@property (readonly) NSString *username;
 @property (readonly) BOOL isAuthenticated;
 
 /**
@@ -118,5 +119,19 @@ typedef void(^FBSessionGenericCompletionHandler)(FBSession *session, id answer, 
  *  @param completionHandler The block to execute when the operation is done. The answer object will be a dictionary structured like {followers:({at:, user:}, {at:, user:})}.
  */
 - (void)followersFor:(NSString*)username withCompletionHandler:(FBSessionGenericCompletionHandler)completionHandler;
+/**
+ *  Return the domain name associated to the current server session
+ *
+ *  @return The server domain name
+ */
+- (NSString*)serverDomain;
+
+/**
+ *  Return a ID unique for each server and persistant between sessions
+ *
+ *  @return A ID unique for each server and persistant between sessions
+ */
+- (NSString*)serverUniqueID;
+
 
 @end

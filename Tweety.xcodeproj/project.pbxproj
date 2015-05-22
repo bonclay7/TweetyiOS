@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0C7752AA1AA70AFC004E3B8E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7752A91AA70AFC004E3B8E /* main.m */; };
 		0C7752AD1AA70AFC004E3B8E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7752AC1AA70AFC004E3B8E /* AppDelegate.m */; };
-		0C7752B01AA70AFC004E3B8E /* Tweety.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C7752AE1AA70AFC004E3B8E /* Tweety.xcdatamodeld */; };
 		0C7752B81AA70AFC004E3B8E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C7752B71AA70AFC004E3B8E /* Images.xcassets */; };
 		0C7752BB1AA70AFC004E3B8E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C7752B91AA70AFC004E3B8E /* LaunchScreen.xib */; };
 		0C7752C71AA70AFC004E3B8E /* TweetyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7752C61AA70AFC004E3B8E /* TweetyTests.m */; };
@@ -20,6 +19,9 @@
 		0C77530B1AA71BE1004E3B8E /* MessagesCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7753091AA71BE1004E3B8E /* MessagesCreationViewController.m */; };
 		0C77530C1AA71BE1004E3B8E /* MessagesCreationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C77530A1AA71BE1004E3B8E /* MessagesCreationViewController.xib */; };
 		0C7753101AA71EAF004E3B8E /* TWFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C77530F1AA71EAF004E3B8E /* TWFeedTableViewController.m */; };
+		0C92AD111AA8516100CC52A9 /* FBDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92AD0E1AA8516100CC52A9 /* FBDataProvider.m */; };
+		0C92AD121AA8516100CC52A9 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92AD101AA8516100CC52A9 /* NSString+MD5.m */; };
+		0C92AD161AA851BD00CC52A9 /* FBModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C92AD141AA851BD00CC52A9 /* FBModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,6 @@
 		0C7752A91AA70AFC004E3B8E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0C7752AB1AA70AFC004E3B8E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0C7752AC1AA70AFC004E3B8E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0C7752AF1AA70AFC004E3B8E /* Tweety.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tweety.xcdatamodel; sourceTree = "<group>"; };
 		0C7752B71AA70AFC004E3B8E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Tweety/Images.xcassets; sourceTree = "<group>"; };
 		0C7752BA1AA70AFC004E3B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0C7752C01AA70AFC004E3B8E /* TweetyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TweetyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +56,11 @@
 		0C77530A1AA71BE1004E3B8E /* MessagesCreationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesCreationViewController.xib; sourceTree = "<group>"; };
 		0C77530E1AA71EAF004E3B8E /* TWFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWFeedTableViewController.h; sourceTree = "<group>"; };
 		0C77530F1AA71EAF004E3B8E /* TWFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWFeedTableViewController.m; sourceTree = "<group>"; };
+		0C92AD0D1AA8516100CC52A9 /* FBDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDataProvider.h; sourceTree = "<group>"; };
+		0C92AD0E1AA8516100CC52A9 /* FBDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBDataProvider.m; sourceTree = "<group>"; };
+		0C92AD0F1AA8516100CC52A9 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		0C92AD101AA8516100CC52A9 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		0C92AD151AA851BD00CC52A9 /* FBModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FBModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,7 @@
 		0C7752A61AA70AFC004E3B8E /* Tweety */ = {
 			isa = PBXGroup;
 			children = (
+				0C92AD131AA8517600CC52A9 /* Categories */,
 				0C7752F91AA71887004E3B8E /* Classes */,
 				0C7752F81AA71873004E3B8E /* Model */,
 				0C7752F41AA714AD004E3B8E /* RestClient */,
@@ -173,7 +180,7 @@
 		0C7752F81AA71873004E3B8E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0C7752AE1AA70AFC004E3B8E /* Tweety.xcdatamodeld */,
+				0C92AD141AA851BD00CC52A9 /* FBModel.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -181,6 +188,8 @@
 		0C7752F91AA71887004E3B8E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0C92AD0D1AA8516100CC52A9 /* FBDataProvider.h */,
+				0C92AD0E1AA8516100CC52A9 /* FBDataProvider.m */,
 				0C7752AB1AA70AFC004E3B8E /* AppDelegate.h */,
 				0C7752AC1AA70AFC004E3B8E /* AppDelegate.m */,
 			);
@@ -206,6 +215,15 @@
 				0C7753081AA71BE1004E3B8E /* MessagesCreationViewController.h */,
 			);
 			name = MessageCreation;
+			sourceTree = "<group>";
+		};
+		0C92AD131AA8517600CC52A9 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				0C92AD0F1AA8516100CC52A9 /* NSString+MD5.h */,
+				0C92AD101AA8516100CC52A9 /* NSString+MD5.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,11 +328,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C92AD111AA8516100CC52A9 /* FBDataProvider.m in Sources */,
 				0C77530B1AA71BE1004E3B8E /* MessagesCreationViewController.m in Sources */,
 				0C7752FD1AA71A5C004E3B8E /* TWSettingsViewController.m in Sources */,
+				0C92AD161AA851BD00CC52A9 /* FBModel.xcdatamodeld in Sources */,
+				0C92AD121AA8516100CC52A9 /* NSString+MD5.m in Sources */,
 				0C7752F71AA71535004E3B8E /* FBSession.m in Sources */,
 				0C7753101AA71EAF004E3B8E /* TWFeedTableViewController.m in Sources */,
-				0C7752B01AA70AFC004E3B8E /* Tweety.xcdatamodeld in Sources */,
 				0C7752AD1AA70AFC004E3B8E /* AppDelegate.m in Sources */,
 				0C7752AA1AA70AFC004E3B8E /* main.m in Sources */,
 			);
@@ -502,6 +522,7 @@
 				0C7752CC1AA70AFC004E3B8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C7752CD1AA70AFC004E3B8E /* Build configuration list for PBXNativeTarget "TweetyTests" */ = {
 			isa = XCConfigurationList;
@@ -510,17 +531,18 @@
 				0C7752CF1AA70AFC004E3B8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		0C7752AE1AA70AFC004E3B8E /* Tweety.xcdatamodeld */ = {
+		0C92AD141AA851BD00CC52A9 /* FBModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				0C7752AF1AA70AFC004E3B8E /* Tweety.xcdatamodel */,
+				0C92AD151AA851BD00CC52A9 /* FBModel.xcdatamodel */,
 			);
-			currentVersion = 0C7752AF1AA70AFC004E3B8E /* Tweety.xcdatamodel */;
-			path = Tweety.xcdatamodeld;
+			currentVersion = 0C92AD151AA851BD00CC52A9 /* FBModel.xcdatamodel */;
+			path = FBModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

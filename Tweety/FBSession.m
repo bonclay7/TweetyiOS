@@ -8,6 +8,8 @@
 
 #import "FBSession.h"
 
+#import "NSString+MD5.h"
+
 typedef enum : NSUInteger {
     FBSessionErrorCodeInvalidUsername,
     FBSessionErrorCodeInvalidUserDomain,
@@ -100,20 +102,19 @@ static NSString *hostID = @"Hayabuza-iOS";
 
 - (void)loginWithPassord:(NSString*)password withCompletionHandler:(FBSessionGenericCompletionHandler)completionHandler {
     if ([self.username length] > 0) {
-        NSURLSessionTask *urlSessionTask = [self startURLSessionToPostAtPath:@"sessions.json"
-                                                     withAuthenticationToken:NO
-                                                                        data:@{@"handle": self.username, @"password": password}
-                                                        andCompletionHandler:^(FBSession *session, id answer, NSError *error) {
-                                                            if (error) {
-                                                                completionHandler(self, nil, error);
-                                                            }
-                                                            else {
-                                                                self.sessionToken = [answer objectForKey:@"token"];
-                                                                self.username = [answer objectForKey:@"handle"];
-                                                                NSLog(@"%@", self.sessionToken);
-                                                                completionHandler(self, answer, error);
-                                                            }
-                                                        }];
+        NSURLSessionTask *urlSessionTask = [self authenticateAtPath:[NSString stringWithFormat:@"authentication/:%@", self.username]
+                                                       withPassword:password
+                                               andCompletionHandler:^(FBSession *session, id answer, NSError *error) {
+                                                   if (error) {
+                                                       completionHandler(self, nil, error);
+                                                   }
+                                                   else {
+                                                       self.sessionToken = [NSString stringWithFormat:@"%@.%@", [[answer objectForKey:@"session"] objectForKey:@"token"], hostID];
+                                                       self.username = [[answer objectForKey:@"session"] objectForKey:@"handle"];
+                                                       completionHandler(self, answer, error);
+                                                   }
+                                               }];
+
         
         if (!urlSessionTask) {
             completionHandler(self, nil, [NSError errorWithDomain:@"fr.sio.ecp.federated-birds.session"
@@ -152,7 +153,7 @@ static NSString *hostID = @"Hayabuza-iOS";
 #pragma mark Messages
 
 - (void)postMessage:(NSString*)message withCompletionHandler:(FBSessionGenericCompletionHandler)completionHandler {
-    NSURLSessionTask *urlSessionTask = [self startURLSessionToPostAtPath:[NSString stringWithFormat:@"/tweets/:%@", self.username]
+    NSURLSessionTask *urlSessionTask = [self startURLSessionToPostAtPath:[NSString stringWithFormat:@"tweets/:%@", self.username]
                                                    withAuthenticationToken:YES
                                                                       data:@{@"message": message}
                                                       andCompletionHandler:completionHandler];
@@ -166,7 +167,7 @@ static NSString *hostID = @"Hayabuza-iOS";
 
 
 - (void)allLocalMessagesWithCompletionHandler:(FBSessionGenericCompletionHandler)completionHandler {
-    NSURLSessionTask *urlSessionTask = [self startURLSessionToGetPath:@"/tweets"
+    NSURLSessionTask *urlSessionTask = [self startURLSessionToGetPath:@"tweets"
                                                   withAuthenticationToken:NO
                                                      andCompletionHandler:completionHandler];
     
@@ -178,7 +179,7 @@ static NSString *hostID = @"Hayabuza-iOS";
 }
 
 - (void)allMessagesFromReadingListWithCompletionHandler:(FBSessionGenericCompletionHandler)completionHandler {
-    NSURLSessionTask *urlSessionTask = [self startURLSessionToGetPath:[NSString stringWithFormat:@"/tweets/:%@/reading_list", self.username]
+    NSURLSessionTask *urlSessionTask = [self startURLSessionToGetPath:[NSString stringWithFormat:@"tweets/:%@/reading_list", self.username]
                                                   withAuthenticationToken:YES
                                                      andCompletionHandler:completionHandler];
     
@@ -192,7 +193,7 @@ static NSString *hostID = @"Hayabuza-iOS";
 #pragma mark Users
 
 - (void)allUsersWithCompletionHandler:(FBSessionGenericCompletionHandler)completionHandler {
-    NSURLSessionTask *urlSessionTask = [self startURLSessionToGetPath:@"/users"
+    NSURLSessionTask *urlSessionTask = [self startURLSessionToGetPath:@"users"
                                                   withAuthenticationToken:NO
                                                      andCompletionHandler:completionHandler];
     
@@ -213,7 +214,7 @@ static NSString *hostID = @"Hayabuza-iOS";
         return;
     }
     
-    NSURLSessionTask *urlSessionTask = [self startURLSessionToPostAtPath:[NSString stringWithFormat:@"/followings/:%@/follow/:%@", self.username, username]
+    NSURLSessionTask *urlSessionTask = [self startURLSessionToPostAtPath:[NSString stringWithFormat:@"followings/:%@/follow/:%@", self.username, username]
                                                    withAuthenticationToken:YES
                                                                       data:nil
                                                       andCompletionHandler:completionHandler];
@@ -232,7 +233,7 @@ static NSString *hostID = @"Hayabuza-iOS";
         return;
     }
     
-    NSURLSessionTask *urlSessionTask = [self startURLSessionToDeletePath:[NSString stringWithFormat:@"/followings/:%@/follow/:%@", self.username, username]
+    NSURLSessionTask *urlSessionTask = [self startURLSessionToDeletePath:[NSString stringWithFormat:@"followings/:%@/follow/:%@", self.username, username]
                                                      withAuthenticationToken:YES
                                                                         data:@{@"handle": username}
                                                         andCompletionHandler:completionHandler];
@@ -249,7 +250,7 @@ static NSString *hostID = @"Hayabuza-iOS";
         username = self.username;
     }
     
-    NSURLSessionTask *urlSessionTask = [self startURLSessionToGetPath:[NSString stringWithFormat:@"/followinfs/:%@", username]
+    NSURLSessionTask *urlSessionTask = [self startURLSessionToGetPath:[NSString stringWithFormat:@"followings/:%@", username]
                                                   withAuthenticationToken:YES
                                                      andCompletionHandler:completionHandler];
     
@@ -265,7 +266,7 @@ static NSString *hostID = @"Hayabuza-iOS";
         username = self.username;
     }
     
-    NSURLSessionTask *urlSessionTask = [self startURLSessionToGetPath:[NSString stringWithFormat:@"/followers/:%@", username]
+    NSURLSessionTask *urlSessionTask = [self startURLSessionToGetPath:[NSString stringWithFormat:@"followers/:%@", username]
                                                   withAuthenticationToken:YES
                                                      andCompletionHandler:completionHandler];
     
@@ -286,8 +287,10 @@ static NSString *hostID = @"Hayabuza-iOS";
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
     if (authenticationToken) {
-        [request addValue:[NSString stringWithFormat:@"%@.%@", self.sessionToken, hostID] forHTTPHeaderField:@"Authorization"];
+        [request addValue:self.sessionToken forHTTPHeaderField:@"Authorization"];
     }
+    
+    NSLog(@"%@", request);
     
     NSURLSessionTask *urlSessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
                                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -309,6 +312,11 @@ static NSString *hostID = @"Hayabuza-iOS";
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     request.HTTPMethod = @"POST";
     
+    if (authenticationToken){
+        [request addValue:self.sessionToken forHTTPHeaderField:@"Authorization"];
+    }
+    
+    
     if (dict) {
         NSError *error = nil;
         request.HTTPBody = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
@@ -318,6 +326,33 @@ static NSString *hostID = @"Hayabuza-iOS";
             return nil;
         }
     }
+    
+    
+    NSLog(@"%@", request);
+    
+    NSURLSessionTask *urlSessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
+                                                                       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                                           if (error) {
+                                                                               completionHandler(self, nil, error);
+                                                                           }
+                                                                           else {
+                                                                               id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+                                                                               completionHandler(self, object, error);
+                                                                           }
+                                                                       }];
+    [urlSessionTask resume];
+    return urlSessionTask;
+}
+
+
+
+- (NSURLSessionTask*)authenticateAtPath:(NSString*)relativePath withPassword:(NSString*)password andCompletionHandler:(FBSessionGenericCompletionHandler)completionHandler {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", self.serverURLString, relativePath]]];
+    request.HTTPMethod = @"POST";
+    [request addValue:password forHTTPHeaderField:@"password"];
+    [request addValue:hostID forHTTPHeaderField:@"hostID"];
+    
+    NSLog(@"%@", request);
     
     NSURLSessionTask *urlSessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
                                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -344,6 +379,7 @@ static NSString *hostID = @"Hayabuza-iOS";
         [request addValue:[NSString stringWithFormat:@"%@.%@", self.sessionToken, hostID] forHTTPHeaderField:@"Authorization"];
     }
     
+    
     if (dict) {
         NSError *error = nil;
         request.HTTPBody = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
@@ -353,7 +389,7 @@ static NSString *hostID = @"Hayabuza-iOS";
             return nil;
         }
     }
-    
+    NSLog(@"%@", request);
     NSURLSessionTask *urlSessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
                                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                                            if (error) {
@@ -379,6 +415,7 @@ static NSString *hostID = @"Hayabuza-iOS";
         [request addValue:[NSString stringWithFormat:@"%@.%@", self.sessionToken, hostID] forHTTPHeaderField:@"Authorization"];
     }
     
+    
     if (dict) {
         NSError *error = nil;
         request.HTTPBody = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
@@ -388,6 +425,8 @@ static NSString *hostID = @"Hayabuza-iOS";
             return nil;
         }
     }
+    
+    NSLog(@"%@", request);
     
     NSURLSessionTask *urlSessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:request
                                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -401,6 +440,13 @@ static NSString *hostID = @"Hayabuza-iOS";
                                                                        }];
     [urlSessionTask resume];
     return urlSessionTask;
+}
+
+
++ (NSString*)domainForUsernameWithDomain:(NSString*)username {
+    NSArray *usernameComponents = [username componentsSeparatedByString:@"@"];
+    
+    return [usernameComponents lastObject];
 }
 
 + (NSString*)serverURLStringForUsernameWithDomain:(NSString*)username {
@@ -431,5 +477,16 @@ static NSString *hostID = @"Hayabuza-iOS";
     
     return YES;
 }
+
+#pragma mark - Other API
+
+- (NSString*)serverDomain {
+    return [[self class] domainForUsernameWithDomain:self.username];
+}
+
+- (NSString*)serverUniqueID {
+    return [[self serverURLString] MD5String];
+}
+
 
 @end

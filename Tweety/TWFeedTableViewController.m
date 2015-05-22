@@ -9,24 +9,49 @@
 #import "TWFeedTableViewController.h"
 #import "MessagesCreationViewController.h"
 
+#import <CoreData/CoreData.h>
+#import "FBDataProvider.h"
+
 @interface TWFeedTableViewController ()
+
+@property NSFetchedResultsController *fetchedResultsController;
 
 @end
 
 @implementation TWFeedTableViewController
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    [[FBDataProvider sharedInstance] updateNow];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     UIBarButtonItem *newMessage = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                                                                 target:self
                                                                                 action:@selector(showMessageCreationView:)];
+    
     self.navigationItem.rightBarButtonItem = newMessage;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Message"];
+    
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
+    
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                        managedObjectContext:[[FBDataProvider sharedInstance] managedObjectContext]
+                                                                          sectionNameKeyPath:nil cacheName:nil];
+    self.fetchedResultsController.delegate = self;
+    
+    NSError *error = nil;
+    [self.fetchedResultsController performFetch:&error];
+    
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
+    NSLog(@"data changed");
+    [self.tableView reloadData];
 }
 
 
@@ -56,66 +81,36 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 0;
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return 0;
+    NSArray *sections = [self.fetchedResultsController sections];
+    id <NSFetchedResultsSectionInfo> sectionsContent = [sections objectAtIndex:section];
+    return [sectionsContent numberOfObjects];
 }
 
-/*
+//*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
-    // Configure the cell...
+    if (cell == nil){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+    }
+    
+    NSManagedObject *tweet = [[self.fetchedResultsController fetchedObjects] objectAtIndex:indexPath.row] ;
+    NSManagedObject *user = [tweet valueForKey:@"author"];
+    
+
+    cell.textLabel.text = [user valueForKey:@"handle"];
+    cell.detailTextLabel.text =[tweet valueForKey:@"content"];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell.textLabel.appearance ]
+
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
